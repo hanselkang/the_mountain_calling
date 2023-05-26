@@ -1,0 +1,21 @@
+---
+pagination:
+  data: country_hills.s_mountains
+  size: 100
+---
+<h1>Scottish Hills</h1>
+<ol>
+  {%- for item in pagination.items %}
+  {{ item.hillnumber }}. {{ item.hillname }} : {{ item.metres }}m <br/>
+  {% endfor -%}
+</ol>
+
+<nav aria-labelledby="my-pagination">
+  {% if page.url != pagination.href.first %}<a href="{{ pagination.href.first }}">First</a>{% else %}First{% endif %}
+  {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}
+  {%- for pageEntry in pagination.pages %}
+  <a href="{{ pagination.hrefs[loop.index0] }}" {% if page.url == pagination.hrefs[loop.index0] %}aria-current="page"{% endif %}>{{ loop.index }}</a>
+  {%- endfor %}
+  {% if pagination.href.next %}<a href="{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}
+  {% if page.url != pagination.href.last %}<a href="{{ pagination.href.last }}">Last</a>{% else %}Last{% endif %}
+</nav>
